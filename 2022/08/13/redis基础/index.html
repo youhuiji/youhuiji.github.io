@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Xishuai">
+
+
+
+
+
+<title></title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Xishuai&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Xishuai&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Xishuai</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">八月 13, 2022&nbsp;&nbsp;22:40:26</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Redis基本操作"><a href="#Redis基本操作" class="headerlink" title="Redis基本操作"></a>Redis基本操作</h2><h3 id="NoSQL："><a href="#NoSQL：" class="headerlink" title="NoSQL："></a>NoSQL：</h3><p>NoSQL 表示为“非关系SQL”，不支持多表查询，没有表和关系的概念，主要在内存中操作&lt;效率更高&gt;。</p>
+<h3 id="Redis："><a href="#Redis：" class="headerlink" title="Redis："></a>Redis：</h3><p>redis 是一个免费开源的NoSQL产品，使用 ANSI C 语言编写，是一个 key-value 存储系统。支持的存储的 value包括&lt;string,hash,list,set,zset(sorted-set&#x3D;&#x3D;有序集合)&gt;。</p>
+<p>redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件中。</p>
+<h3 id="1、Redis基本操作"><a href="#1、Redis基本操作" class="headerlink" title="1、Redis基本操作"></a>1、Redis基本操作</h3><h4 id="启动服务端"><a href="#启动服务端" class="headerlink" title="启动服务端"></a>启动服务端</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动支持中文的客户端"><a href="#启动支持中文的客户端" class="headerlink" title="启动支持中文的客户端"></a>启动支持中文的客户端</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli <span class="attr">--raw</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="运行测试命令"><a href="#运行测试命令" class="headerlink" title="运行测试命令"></a>运行测试命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping</span><br></pre></td></tr></table></figure>
+
+<h4 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h4><ul>
+<li><p>数据库本身没有名称，默认16个，通过0-15来标识，例如选中编号为1的数据库：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>redis在初始化时，默认选择0号数据库</p>
+</li>
+</ul>
+<h4 id="redis键值对说明"><a href="#redis键值对说明" class="headerlink" title="redis键值对说明"></a>redis键值对说明</h4><ul>
+<li>redis 是 key-value 的数据结构</li>
+<li>每条数据都是一个键值对</li>
+<li>键的类型是字符串</li>
+<li>值的类型分为五种：字符串-string，哈希-hash，列表-list，无序集合-set，有序集合-zset</li>
+</ul>
+<h4 id="redis基本操作"><a href="#redis基本操作" class="headerlink" title="redis基本操作"></a>redis基本操作</h4><ul>
+<li><p>如果设置的键不存在则为添加、如果已经存在则为修改</p>
+</li>
+<li><p>redis 中字符串可以使用单引号或者双引号，也可以省略引号</p>
+</li>
+<li><p>设置键值</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set key value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置键值以及过期时间</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set key senconds value </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置多个键值对</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mset key1 vlaue1 key2 value2...........</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>追加值</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">append key value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取单个值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">get</span> <span class="keyword">key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个值</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mget key1 key2 ............</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除键以及其对应值</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del key1 key2 ..........</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="键命令"><a href="#键命令" class="headerlink" title="键命令"></a>键命令</h4><ol>
+<li><p>查找键</p>
+<ul>
+<li><p>参数支持正则表达式，找到键，返回键名，找不到返回空</p>
+  <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">keys</span> pattern</span><br><span class="line">======================</span><br><span class="line">例如：</span><br><span class="line"><span class="number">1</span>.查找所有键  <span class="keyword">keys</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="number">2</span>.查找包含s的键  <span class="keyword">keys</span> <span class="string">&quot;*s*&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p> 2.判断键是否存在</p>
+ <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">exists</span> key &lt;返回<span class="number">1</span>表示存在&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 3.查看键对应的 value 类型</p>
+ <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> key</span></span><br></pre></td></tr></table></figure>
+
+<p> 4.设置键过期的单位</p>
+<ul>
+<li><p>以秒为单位</p>
+</li>
+<li><p>如果没有指定的国企时间则一直存在 直到通过del 移除</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">expire key seconds</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p> 5.查看键有效时间</p>
+<ul>
+<li><p>以秒为单位</p>
+<ul>
+<li>返回大于0，代表有效时间，单位：秒</li>
+<li>返回-1，表示永久有效</li>
+<li>返回-2，表示键不存在</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ttl <span class="keyword">key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="2、哈希"><a href="#2、哈希" class="headerlink" title="2、哈希"></a>2、哈希</h3><h5 id="hash介绍"><a href="#hash介绍" class="headerlink" title="hash介绍"></a>hash介绍</h5><ul>
+<li>hash用于存储“键值对”集合</li>
+<li>hash中的值的类型为string</li>
+<li>同一个哈希中字段名不可重复</li>
+</ul>
+<img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132238348.png" alt="图片名称" style="zoom:80%;" />
+
+<h5 id="增加、删除"><a href="#增加、删除" class="headerlink" title="增加、删除"></a>增加、删除</h5><ul>
+<li><p>设置单个字段</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hset key field value --- 其中&lt;field value&gt; 对应哈希表中的&lt;key value&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置多个字段</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hmset <span class="keyword">key</span> filed1 value1 field2 value2 ......</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取指定键所有的字段</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hkeys <span class="keyword">key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取一个字段的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hget <span class="keyword">key</span> field</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个字段的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hmget <span class="keyword">key</span> field1 field2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有字段的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hvals <span class="keyword">key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有字段名包括字段对应的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hgetall <span class="keyword">key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><ul>
+<li><p>删除hash中的指定字段</p>
+<ul>
+<li>字段对应的值会一起被删除</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdel <span class="keyword">key</span> field1 field2..........</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除整个hash键以及字段和值，使用del命令</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">del</span> key1 key2..........</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3、列表List"><a href="#3、列表List" class="headerlink" title="3、列表List"></a>3、列表List</h4><h5 id="list介绍"><a href="#list介绍" class="headerlink" title="list介绍"></a>list介绍</h5><ul>
+<li>列表中的值类型为字符串</li>
+<li>列表中的每个值按照添加顺序排序</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132238207.png" alt="图片名称"></p>
+<h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><ul>
+<li><p>从左侧插入值&lt;头插&gt;</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpush <span class="keyword">key</span> value1 value2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从右侧插入值&lt;尾插&gt;</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpush <span class="keyword">key</span> value1 value2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在指定值的前或者后插入值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linsert <span class="keyword">key</span> before/after value <span class="built_in">new</span>-value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h4><ul>
+<li><p>返回列表中指定范围内的值</p>
+<ul>
+<li>索引从左侧开始，第一个值的索引为0</li>
+<li>索引可以为负数，表示从尾部开始计数，如：-1表示最后一个值</li>
+<li>start，stop为所要获取值的索引</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrange <span class="keyword">key</span> start <span class="keyword">stop</span> &lt;start <span class="keyword">stop</span>认为是闭包含的范围&gt; </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><ul>
+<li><p>设置指定索引的值</p>
+<ul>
+<li>索引从左侧开始，第一个值的索引为0</li>
+<li>索引可以是负数，表示从尾部开始，-1代表最后一个值</li>
+</ul>
+  <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lset key <span class="keyword">index</span> value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p>删除指定的值</p>
+<ul>
+<li>将列表中前 count 次出现的值移除</li>
+<li>count &gt; 0：从头往尾删除</li>
+<li>count &lt; 0：从尾往头删除</li>
+<li>count &#x3D; 0：删除所有值</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrem <span class="keyword">key</span> count value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4、无序集合-set"><a href="#4、无序集合-set" class="headerlink" title="4、无序集合 set"></a>4、无序集合 set</h3><h4 id="set介绍"><a href="#set介绍" class="headerlink" title="set介绍"></a>set介绍</h4><ul>
+<li>无序集合中值类型为字符串</li>
+<li>集合中不允许有重复的值</li>
+<li>对于集合中的值，只能添加和删除，不能修改</li>
+</ul>
+<h4 id="增加-1"><a href="#增加-1" class="headerlink" title="增加"></a>增加</h4><ul>
+<li><p>集合中添加值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sadd <span class="keyword">key</span> value1 value2.........</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取-1"><a href="#获取-1" class="headerlink" title="获取"></a>获取</h4><ul>
+<li><p>返回所有值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smembers <span class="keyword">key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除-2"><a href="#删除-2" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p>删除指定的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srem <span class="keyword">key</span> value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5、有序集合zset"><a href="#5、有序集合zset" class="headerlink" title="5、有序集合zset"></a>5、有序集合zset</h3><h4 id="zset介绍"><a href="#zset介绍" class="headerlink" title="zset介绍"></a>zset介绍</h4><ul>
+<li>有序集合中的值类型为字符串</li>
+<li>集合中不允许有重复的值</li>
+<li>每个值都会关联一个分数，分数可以为附属，通过分数将值从小到大排序</li>
+<li>对于集合中的值，只能添加和删除，不能修改</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132238846.png" alt="图片名称"></p>
+<h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><ul>
+<li><p>添加值</p>
+  <figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zadd key <span class="keyword">score1 </span>value1 <span class="keyword">score2 </span>value2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取-2"><a href="#获取-2" class="headerlink" title="获取"></a>获取</h4><ul>
+<li><p>返回指定范围内的值</p>
+<ul>
+<li>start，stop为值的下标索引</li>
+<li>第一个值的索引为0</li>
+<li>索引可以为负数，表示从尾部开始计数，-1表示最后一个值</li>
+<li>withscores：同时获取值对应的分数(score)</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zrange <span class="keyword">key</span> start <span class="keyword">stop</span>[withscores]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回分数(score)在 min 和 max 之间的值</p>
+  <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zrangebyscore key <span class="built_in">min</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回值 value 的分数(score)</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zscore <span class="keyword">key</span> value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除-3"><a href="#删除-3" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p>删除指定的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zrem <span class="keyword">key</span> value1 value2........</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除分数(score)在指定范围之间的值</p>
+  <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zremrangebyscore key <span class="built_in">min</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Xishuai</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://youhuiji.github.io/2022/08/13/redis%E5%9F%BA%E7%A1%80/">https://youhuiji.github.io/2022/08/13/redis%E5%9F%BA%E7%A1%80/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2022/08/13/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%A4%87%E8%80%83/"></a>
+            
+            
+            <a class="next" rel="next" href="/2022/08/13/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Xishuai | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
