@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/08/12/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo搭建博客</title>
+    <url>/2022/08/12/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis基本操作</title>
+    <url>/2022/08/13/redis%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h3 id="NoSQL："><a href="#NoSQL：" class="headerlink" title="NoSQL："></a>NoSQL：</h3><p>NoSQL 表示为“非关系SQL”，不支持多表查询，没有表和关系的概念，主要在内存中操作&lt;效率更高&gt;。</p>
+<h3 id="Redis："><a href="#Redis：" class="headerlink" title="Redis："></a>Redis：</h3><p>redis 是一个免费开源的NoSQL产品，使用 ANSI C 语言编写，是一个 key-value 存储系统。支持的存储的 value包括&lt;string,hash,list,set,zset(sorted-set&#x3D;&#x3D;有序集合)&gt;。</p>
+<p>redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件中。</p>
+<h3 id="1、Redis基本操作"><a href="#1、Redis基本操作" class="headerlink" title="1、Redis基本操作"></a>1、Redis基本操作</h3><h4 id="启动服务端"><a href="#启动服务端" class="headerlink" title="启动服务端"></a>启动服务端</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">redis-server</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动客户端"><a href="#启动客户端" class="headerlink" title="启动客户端"></a>启动客户端</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动支持中文的客户端"><a href="#启动支持中文的客户端" class="headerlink" title="启动支持中文的客户端"></a>启动支持中文的客户端</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line">redis-cli <span class="attr">--raw</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="运行测试命令"><a href="#运行测试命令" class="headerlink" title="运行测试命令"></a>运行测试命令</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ping</span><br></pre></td></tr></table></figure>
+
+<h4 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h4><ul>
+<li><p>数据库本身没有名称，默认16个，通过0-15来标识，例如选中编号为1的数据库：</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">select 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>redis在初始化时，默认选择0号数据库</p>
+</li>
+</ul>
+<h4 id="redis键值对说明"><a href="#redis键值对说明" class="headerlink" title="redis键值对说明"></a>redis键值对说明</h4><ul>
+<li>redis 是 key-value 的数据结构</li>
+<li>每条数据都是一个键值对</li>
+<li>键的类型是字符串</li>
+<li>值的类型分为五种：字符串-string，哈希-hash，列表-list，无序集合-set，有序集合-zset</li>
+</ul>
+<h4 id="redis基本操作"><a href="#redis基本操作" class="headerlink" title="redis基本操作"></a>redis基本操作</h4><ul>
+<li><p>如果设置的键不存在则为添加、如果已经存在则为修改</p>
+</li>
+<li><p>redis 中字符串可以使用单引号或者双引号，也可以省略引号</p>
+</li>
+<li><p>设置键值</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">set key value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置键值以及过期时间</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">set key senconds value </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置多个键值对</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mset key1 vlaue1 key2 value2...........</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>追加值</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">append key value</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取单个值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line"><span class="keyword">get</span> <span class="keyword">key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个值</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mget key1 key2 ............</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除键以及其对应值</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">del key1 key2 ..........</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="键命令"><a href="#键命令" class="headerlink" title="键命令"></a>键命令</h4><ol>
+<li><p>查找键</p>
+<ul>
+<li><p>参数支持正则表达式，找到键，返回键名，找不到返回空</p>
+  <figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">keys</span> pattern</span><br><span class="line">======================</span><br><span class="line">例如：</span><br><span class="line"><span class="number">1</span>.查找所有键  <span class="keyword">keys</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="number">2</span>.查找包含s的键  <span class="keyword">keys</span> <span class="string">&quot;*s*&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p> 2.判断键是否存在</p>
+ <figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">exists</span> key &lt;返回<span class="number">1</span>表示存在&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 3.查看键对应的 value 类型</p>
+ <figure class="highlight haskell"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> key</span></span><br></pre></td></tr></table></figure>
+
+<p> 4.设置键过期的单位</p>
+<ul>
+<li><p>以秒为单位</p>
+</li>
+<li><p>如果没有指定的国企时间则一直存在 直到通过del 移除</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">expire key seconds</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p> 5.查看键有效时间</p>
+<ul>
+<li><p>以秒为单位</p>
+<ul>
+<li>返回大于0，代表有效时间，单位：秒</li>
+<li>返回-1，表示永久有效</li>
+<li>返回-2，表示键不存在</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">ttl <span class="keyword">key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="2、哈希"><a href="#2、哈希" class="headerlink" title="2、哈希"></a>2、哈希</h3><h5 id="hash介绍"><a href="#hash介绍" class="headerlink" title="hash介绍"></a>hash介绍</h5><ul>
+<li>hash用于存储“键值对”集合</li>
+<li>hash中的值的类型为string</li>
+<li>同一个哈希中字段名不可重复</li>
+</ul>
+<img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132238348.png" alt="图片名称" style="zoom:80%;" />
+
+<h5 id="增加、删除"><a href="#增加、删除" class="headerlink" title="增加、删除"></a>增加、删除</h5><ul>
+<li><p>设置单个字段</p>
+  <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hset key field value --- 其中&lt;field value&gt; 对应哈希表中的&lt;key value&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置多个字段</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hmset <span class="keyword">key</span> filed1 value1 field2 value2 ......</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取指定键所有的字段</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hkeys <span class="keyword">key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取一个字段的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hget <span class="keyword">key</span> field</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取多个字段的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hmget <span class="keyword">key</span> field1 field2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有字段的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hvals <span class="keyword">key</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取所有字段名包括字段对应的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hgetall <span class="keyword">key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h5><ul>
+<li><p>删除hash中的指定字段</p>
+<ul>
+<li>字段对应的值会一起被删除</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">hdel <span class="keyword">key</span> field1 field2..........</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除整个hash键以及字段和值，使用del命令</p>
+  <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">del</span> key1 key2..........</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="3、列表List"><a href="#3、列表List" class="headerlink" title="3、列表List"></a>3、列表List</h4><h5 id="list介绍"><a href="#list介绍" class="headerlink" title="list介绍"></a>list介绍</h5><ul>
+<li>列表中的值类型为字符串</li>
+<li>列表中的每个值按照添加顺序排序</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132238207.png" alt="图片名称"></p>
+<h4 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h4><ul>
+<li><p>从左侧插入值&lt;头插&gt;</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">lpush <span class="keyword">key</span> value1 value2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从右侧插入值&lt;尾插&gt;</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">rpush <span class="keyword">key</span> value1 value2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在指定值的前或者后插入值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">linsert <span class="keyword">key</span> before/after value <span class="built_in">new</span>-value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h4><ul>
+<li><p>返回列表中指定范围内的值</p>
+<ul>
+<li>索引从左侧开始，第一个值的索引为0</li>
+<li>索引可以为负数，表示从尾部开始计数，如：-1表示最后一个值</li>
+<li>start，stop为所要获取值的索引</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">lrange <span class="keyword">key</span> start <span class="keyword">stop</span> &lt;start <span class="keyword">stop</span>认为是闭包含的范围&gt; </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><ul>
+<li><p>设置指定索引的值</p>
+<ul>
+<li>索引从左侧开始，第一个值的索引为0</li>
+<li>索引可以是负数，表示从尾部开始，-1代表最后一个值</li>
+</ul>
+  <figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">lset key <span class="keyword">index</span> value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p>删除指定的值</p>
+<ul>
+<li>将列表中前 count 次出现的值移除</li>
+<li>count &gt; 0：从头往尾删除</li>
+<li>count &lt; 0：从尾往头删除</li>
+<li>count &#x3D; 0：删除所有值</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">lrem <span class="keyword">key</span> count value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4、无序集合-set"><a href="#4、无序集合-set" class="headerlink" title="4、无序集合 set"></a>4、无序集合 set</h3><h4 id="set介绍"><a href="#set介绍" class="headerlink" title="set介绍"></a>set介绍</h4><ul>
+<li>无序集合中值类型为字符串</li>
+<li>集合中不允许有重复的值</li>
+<li>对于集合中的值，只能添加和删除，不能修改</li>
+</ul>
+<h4 id="增加-1"><a href="#增加-1" class="headerlink" title="增加"></a>增加</h4><ul>
+<li><p>集合中添加值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">sadd <span class="keyword">key</span> value1 value2.........</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取-1"><a href="#获取-1" class="headerlink" title="获取"></a>获取</h4><ul>
+<li><p>返回所有值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">smembers <span class="keyword">key</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除-2"><a href="#删除-2" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p>删除指定的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">srem <span class="keyword">key</span> value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="5、有序集合zset"><a href="#5、有序集合zset" class="headerlink" title="5、有序集合zset"></a>5、有序集合zset</h3><h4 id="zset介绍"><a href="#zset介绍" class="headerlink" title="zset介绍"></a>zset介绍</h4><ul>
+<li>有序集合中的值类型为字符串</li>
+<li>集合中不允许有重复的值</li>
+<li>每个值都会关联一个分数，分数可以为附属，通过分数将值从小到大排序</li>
+<li>对于集合中的值，只能添加和删除，不能修改</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132238846.png" alt="图片名称"></p>
+<h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><ul>
+<li><p>添加值</p>
+  <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">zadd key <span class="keyword">score1 </span>value1 <span class="keyword">score2 </span>value2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="获取-2"><a href="#获取-2" class="headerlink" title="获取"></a>获取</h4><ul>
+<li><p>返回指定范围内的值</p>
+<ul>
+<li>start，stop为值的下标索引</li>
+<li>第一个值的索引为0</li>
+<li>索引可以为负数，表示从尾部开始计数，-1表示最后一个值</li>
+<li>withscores：同时获取值对应的分数(score)</li>
+</ul>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">zrange <span class="keyword">key</span> start <span class="keyword">stop</span>[withscores]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回分数(score)在 min 和 max 之间的值</p>
+  <figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">zrangebyscore key <span class="built_in">min</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回值 value 的分数(score)</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">zscore <span class="keyword">key</span> value</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="删除-3"><a href="#删除-3" class="headerlink" title="删除"></a>删除</h4><ul>
+<li><p>删除指定的值</p>
+  <figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">zrem <span class="keyword">key</span> value1 value2........</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除分数(score)在指定范围之间的值</p>
+  <figure class="highlight lua"><table><tr><td class="code"><pre><span class="line">zremrangebyscore key <span class="built_in">min</span> <span class="built_in">max</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络工程师备考</title>
+    <url>/2022/08/13/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B%E5%B8%88%E5%A4%87%E8%80%83/</url>
+    <content><![CDATA[<h3 id="考试目的"><a href="#考试目的" class="headerlink" title="考试目的"></a>考试目的</h3><p>今天突然发现2021年上半年的网络工程师及格线出来了，还是跟原来一样，45分就算及格。</p>
+<img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132245932.png" alt="img" style="zoom:80%;" />
+
+<p>我这上午考了47分，下午考了54分，也算是通过了网络工程师考试了。而我参加这个网络工程师考试只是为了我能在保研的时候能加分，一个看起来有点功利的目的。</p>
+<p>这篇博客算是一个总结，希望可以给其他想要参加考试的人一个小小的参考。</p>
+<hr>
+<h3 id="考试形式"><a href="#考试形式" class="headerlink" title="考试形式"></a>考试形式</h3><p> 在网络工程师考试中，分为<strong>上午考试</strong>和<strong>下午考试</strong>，两场考试需要都通过才算是合格。</p>
+<p> 在上午的考试中，全部都是单项选择题，每个选择题分值是1分，总分75分，答对60%就可以获得45分。在单项选择中，最后5道题是英文题，一般都是与某个计算机网络的具体概念有关，比如说VPN，IPv6，IPv4，MAC等等，这就要求你需要知道一些中文概念或者短语对应的英文。这5道题一般都不难，可以通过上下文判断。</p>
+<p> 在下午的考试中，主要内容是网络系统设计与管理，也就是规划设计题和交换机或者路由器的配置问题。在2021年上半年的考试中，绝大部分都是给了备选项的，就类似于一个大题挖出来10个空，然后给你12个备选项，让你选择。不过也有一部分的题目，没有给出备选项，就是一个单纯的填空题或者问答题，这就要看你平时的知识积累了。整体难度不是很大。这个题目分布就不规律了，不过同样是总分75分，拿到60%就可以获得45分。</p>
+<blockquote>
+<p>无论是上午考试还是下午考试，都是150分钟。</p>
+</blockquote>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p> 在上午的考试中需要填答题卡，所以就需要你自备</p>
+<p> 1.一支2B铅笔用来涂卡</p>
+<p> 2.橡皮擦</p>
+<p> 3.黑色圆珠笔(我当时用的是0.5mm的，我记得对于粗细没有规定)。</p>
+<p> 4.个人准考证(黑白即可，不需要彩印)</p>
+<p> 5.个人身份证。</p>
+<p> 因为我当时参加考试时全国部分地区还有新冠病例，所以还要求有:</p>
+<p> 6.健康码(绿码)</p>
+<p> 7.个人行程码</p>
+<p> 8.如果你来自于中风险地区，需要核酸检测阴性证明。</p>
+<h3 id="参考书籍"><a href="#参考书籍" class="headerlink" title="参考书籍"></a>参考书籍</h3><p> 1.参考书籍官网都给出了，这里我挂个官网链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.ruankao.org.cn/book/lists</span><br></pre></td></tr></table></figure>
+
+<p> 这里我给出我当时收集到的网络工程师教程(第五版)：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1zkznQk_bm9L6yNmWBwGikg 提取码：1234 </span><br></pre></td></tr></table></figure>
+
+<p>如果你把这本书作为参考的话，就需要提前2-3个月准备，因为这本书真的很厚，而且知识点很多，你除了需要理解之外还需要背诵。当你把这本书融汇贯通之后，上午的考试肯定可以拿到高分，不过对于临时抱佛脚，想要突击几天的人不合适。</p>
+<p> 2.我用的书：</p>
+<p> 2-1.参考书是：朱小平老师出的《网络工程师5天修炼》</p>
+<p> 2-2.习题是：朱小平老师的《网络工程师考前冲刺100题》(第二版)，《网络工程师真题精讲与押题密卷》</p>
+<p>我这不是打广告(手动狗头)，因为市面上你能找到的关于网络工程师而且销量高的就这几本，还有一个就是希赛的，但是人家的书是跟视频课绑定的，他这个视频课需要好几千，对于在校生来说不是首选项。</p>
+<p>2-3.还有一本书是：谢希仁老师的《计算机网络(第7版)》。</p>
+<blockquote>
+<p>其中谢希仁老师的书可以在看朱小平老师的书之前大致浏览一遍，因为刚学过计算机网络这时候再复习一遍，知识点会更加牢固。不过这本书不适合作为全程的复习参考书，这个只是一个开胃菜，作为强化计算机网路知识的一个方式。重点还是朱小平老师的《网络工程师5天修炼》，这本书包含的考点更多，也更像是一本为了考试而准备的知识点大全，所以对于这本书既要理解也要背诵。学完每一章之后，就可以按照自己的习惯去做对应的《考前冲刺100题》对应习题了。这个100题的题量很小，不过能起到一个查漏补缺和知识点拓展补充的作用。所以重点还是相应知识点的理解和记忆。</p>
+</blockquote>
+<p>对于《网络工程师真题精讲与押题密卷》这本书，就是几套真题和模拟题，其中2021年的书的目录是这样的：</p>
+<img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132248407.png" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<p>这几套题可以用来练手，我当时是在5天修炼以及100题都看完做完之后才开始的，一天一套，刚好考前做完。当然如果时间充裕的话还可以做一做2018年以前的选择题和部分规划题。其中2018年开始采用新的考纲，主要是不再使用和考察思科的命令，而改用和考察华为的命令，以及部分知识点的调整。下面给出我当时收集到的2018年以后真题及参考答案：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1UBY-OohgMB0nqcRujXk6xg 提取码：1234 </span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="教学视频"><a href="#教学视频" class="headerlink" title="教学视频"></a>教学视频</h3><p>1.现在网上(B站)比较流行的视频有大涛的和希赛教育的。其中大涛的是2018年版的似乎，而希赛在B站有官方账号，会免费分享一些学年的视频。如下图，这里第一个就是希赛官方分享的视频，第二个是大涛的2018年的教学视频。（这里第二个虽然注明了2019年最新，但是你点开之后还是2018年视频。）</p>
+<img src="https://raw.githubusercontent.com/youhuiji/images/master/202208132249904.png" alt="在这里插入图片描述" style="zoom:80%;" />
+
+<p>2.我当时看的也是希赛的视频，是2018版的，不过不是上图的男老师，是一个女老师，具体链接如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://www.bilibili.com/video/BV1EV411U7QX?from=search&amp;seid=12371943451293901882</span><br></pre></td></tr></table></figure>
+
+<p>在看这个视频的时候可以结合朱小平老师的5天修炼，做一下笔记。我当时是先把视频刷完，熟悉一下知识点，然后才开始看的5天修炼。这里给出我当时做的笔记供大家参考(最好还是自己看的时候做一下笔记)：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">链接：https://pan.baidu.com/s/1PAaO-3Ch0sYHchQO6-Ndow 提取码：1234 </span><br></pre></td></tr></table></figure>
+
+<h3 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h3><ol>
+<li>视频还是推荐希赛的，大涛的我当时也听了，说实话我不喜欢。具体你可以都听听试一下，看你喜欢哪个。</li>
+<li>因为考试是面向全社会的，跟你坐在同一个考场的只有一小部分是学生，大部分都是步入社会的成年人。他们有可能会作弊，但是你不要作弊，你就好好学，然后去考试，一定可以过的。虽然监考老师对于作弊的人不会怎么样，但是如果巡考发现就会直接取消你的考试资格，似乎信用上也会给你记一笔。最重要的还是放平心态。</li>
+<li>最后，我当时参加的是河南省的考试，考点就两个一个是郑州，一个是新乡，其中我当时的考点的是新乡的新乡学院。</li>
+<li>有其他问题可以评论或者私信。我看到就会回复的。加油！</li>
+</ol>
+]]></content>
+      <categories>
+        <category>软考</category>
+      </categories>
+      <tags>
+        <tag>软考</tag>
+      </tags>
+  </entry>
+</search>
