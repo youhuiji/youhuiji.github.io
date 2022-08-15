@@ -127,6 +127,71 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
@@ -156,7 +221,141 @@
         </header>
 
         <div class="post-content">
-            
+            <blockquote>
+<p>hexo是基于node框架，所以需要首先安装node</p>
+<p>同时由于博客是部署在Github-Page，所以还需要安装git</p>
+</blockquote>
+<h3 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h3><ul>
+<li><p>通过官网直接下载<code>LTS</code>长期支持版本  <a target="_blank" rel="noopener" href="https://nodejs.org/en/">Node.js (nodejs.org)</a></p>
+</li>
+<li><p>安装，直接一路默认即可，注意最好更改默认安装路径到非系统盘，避免后续产生读写权限问题</p>
+</li>
+<li><p>查看node 和npm版本号，验证环境变量是否添加成功</p>
+</li>
+</ul>
+<img src="/../images-static/202208100018697.png" alt="image-20211211135039275" style="zoom:80%;" />
+
+<ul>
+<li><p>为节省系统盘空间，更改默认<code>node_cache</code>，以及<code>node_global</code>的位置，在非系统盘创建，<code>node_cache</code>，以及<code>node_global</code>，并在<code>node_global</code>目录下新建<code>node_moudles</code></p>
+</li>
+<li><p>打开<code>Terminal</code>，键入如下命令</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix &quot;创建的node_global文件夹所在路径&quot;</span><br><span class="line">npm config set cache &quot;创建的node_cache文件夹所在路径&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在系统变量中，新建，变量名：<code>NODE_PATH </code>变量值：<code>node_global</code>文件夹下的<code>node_modules</code>文件夹。如：<code>E:\software\nodejs\node_global\node_modules</code></p>
+</li>
+<li><p>修改用户变量中的Path变量，将默认的npm路径修改为新建的<code>node_global</code>路径，其中默认的 npm路径一般为<code>C/User/用户名/Appdata/Romaing/npm</code></p>
+</li>
+</ul>
+<img src="/../images-static/202208100018609.png" alt="image-20211211134619349" style="zoom:70%;" />
+
+<ul>
+<li><p>修改 npm默认源为淘宝镜像源      <a target="_blank" rel="noopener" href="https://npmmirror.com/">中国 NPM 镜像 (npmmirror.com)</a></p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 Treminal中输入 <code>npm config list</code>，验证镜像源是否配置成功</p>
+  <img src="/../images-static/202208100019735.png" alt="image-20211211135615943" style="zoom:75%;" /></li>
+</ul>
+<h3 id="git安装与配置"><a href="#git安装与配置" class="headerlink" title="git安装与配置"></a>git安装与配置</h3><ul>
+<li><p>下载地址 <a target="_blank" rel="noopener" href="https://git-scm.com/download/win">Git for Windows</a></p>
+</li>
+<li><p>一路默认安装即可</p>
+</li>
+<li><p>打开Windows Terminal，键入 <code>git --version</code>，如下图所示则安装成功</p>
+<p>  <img src="/../images-static/image-20220815134714787.png" alt="image-20220815134714787"></p>
+</li>
+<li><p>关联github账户</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;你的用户名&quot;</span><br><span class="line">git config --global user.email 你的github账户的邮箱地址</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#####################验证配置###############################</span></span></span><br><span class="line">git config --global --list</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成公钥，键入以下命令，一路回车即可</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成的公钥默认地址为 <code>C:\Users\Windows用户名\.ssh</code></p>
+  <img src="/../images-static/image-20220815135527583.png" alt="image-20220815135527583" style="zoom:80%;" />
+</li>
+<li><p>如上图所示，打开<code>id_rsa.pub</code>，复制其中的密钥，<code>打开 github官网 --&gt; 点击个人头像 --&gt; Settings --&gt; SSH and GPG keys --&gt; New SSH key</code>。</p>
+</li>
+<li><p>新建仓库  <code>点击右上角的+号 --&gt; new repository</code></p>
+  <img src="/../images-static/image-20220815142937768.png" alt="image-20220815142937768" style="zoom:70%;" /></li>
+</ul>
+<h3 id="使用hexo框架"><a href="#使用hexo框架" class="headerlink" title="使用hexo框架"></a>使用hexo框架</h3><h4 id="hexo框架的使用"><a href="#hexo框架的使用" class="headerlink" title="hexo框架的使用"></a>hexo框架的使用</h4><ul>
+<li><p>打开Windows Terminal或 CMD命令窗口</p>
+</li>
+<li><p>输入以下命令全局安装hexo</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>验证hexo是否安装成功</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建本地空文件夹 存放博客文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir my-blog</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>初始化博客</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#########首先进入博客文件夹========</span></span></span><br><span class="line">cd my-blog</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>打开 <code>my-blog\_config.yml</code>文件，修改为如下内容</p>
+  <img src="/../images-static/image-20220815143248358.png" alt="image-20220815143248358" style="zoom:70%;" />
+
+  <img src="/../images-static/image-20220815143423108.png" alt="image-20220815143423108" style="zoom:80%;" />
+</li>
+<li><p>安装git部署插件</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成博客</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>本地预览博客</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<img src="/../images-static/image-20220815140951766.png" alt="image-20220815140951766" style="zoom:70%;" />
+
+<p>如上图所示，在浏览器中访问 <code>http://localhost:4000/</code>即可看到预览效果</p>
+<ul>
+<li>部署博客到github，键入以下命令，然后访问<code>your-username.github.io</code>即可</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h4><ul>
+<li><p>可以使用<code>github+Picgo</code>作为图床，但是本地访问的时候存在概率性未加载问题。</p>
+</li>
+<li><p>使用阿里云<code>OSS+Picgo</code>搭建图床，收费稳定，但是可能存在被恶意盗刷的风险。</p>
+</li>
+<li><p>我这里直接使用相对地址引用，本地浏览很方便，在部署到Github后跟使用<code>github+Picgo</code>作为图床效果一样。</p>
+</li>
+<li><p>打开<code>my-blog\scaffolds\post.md</code>文件，键入如下内容：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags: </span><br><span class="line">categories: </span><br><span class="line">typora-root-url: /</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开Typora，<code>文件 --&gt; 偏好设置 --&gt; 图像 --&gt; 插入图像时</code>,修改为如下内容:</p>
+  <img src="/../images-static/image-20220815142259375.png" alt="image-20220815142259375" style="zoom:65%;" />
+</li>
+<li><p>每次用typora写博客时，要保证<code>typora-root-url: /</code>参数是存在的，否则会导致找不到正确的图片路径而无法正常加载。</p>
+</li>
+</ul>
+<h4 id="主题选择"><a href="#主题选择" class="headerlink" title="主题选择"></a>主题选择</h4><ul>
+<li><p>个人推荐 <code>Chic</code>主题，该主题十分简洁。</p>
+</li>
+<li><p>主题参考文档 <a target="_blank" rel="noopener" href="https://github.com/Siricee/hexo-theme-Chic/blob/master/README-CN.md">Hexo-theme-Chic</a></p>
+</li>
+<li><p>修改主题默认文字，推荐<a target="_blank" rel="noopener" href="https://download.jetbrains.com/fonts/JetBrainsMono-2.242.zip">Jetbrains Moon</a>和 <a target="_blank" rel="noopener" href="https://communityfile-drcn.op.hicloud.com/FileServer/getFile/cmtyPub/011/111/111/0000000000011111111.20220527115222.36009086555928047609106823953760:50530526070936:2800:E1CA794341643D6B6FFE8F1EE2DBB96B786975D088FDA18348E89FEC28135686.zip?needInitFileName=true">HarmonyOS Sans</a>。将下载好的字体复制到<code>themes\Chic\source\fonts\lanting</code>文件夹下，修改主题配置文件<code>themes\Chic\source\css\font.styl</code>,如下所示：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@font-face</span><br><span class="line">  font-family &#x27;lanting&#x27;</span><br><span class="line">  src: url(&#x27;../fonts/lanting/lanting.eot&#x27;); /* IE9 */</span><br><span class="line">  src: url(&#x27;../fonts/lanting/lanting.eot?#iefix&#x27;) format(&#x27;embedded-opentype&#x27;), /* IE6-IE8 */ </span><br><span class="line">       url(&#x27;../fonts/lanting/lanting.woff2&#x27;) format(&#x27;woff2&#x27;),</span><br><span class="line">          url(&#x27;../fonts/lanting/lanting.woff&#x27;) format(&#x27;woff&#x27;),</span><br><span class="line">          url(&#x27;../fonts/lanting/JetBrainsMono-Light.ttf&#x27;) format(&#x27;truetype&#x27;),</span><br><span class="line">          url(&#x27;../fonts/lanting/HarmonyOS_Sans_Medium.ttf&#x27;) format(&#x27;truetype&#x27;); </span><br><span class="line">          /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */</span><br><span class="line">  font-weight 430</span><br><span class="line">  font-display swap</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">font-family = <span class="string">&#x27;JetBrains Mono Light&#x27;</span>,<span class="string">&#x27;HarmonyOS Sans Regular&#x27;</span>,Lantinghei SC, <span class="string">&#x27;lanting&#x27;</span>, PingFang SC, Seguo UI, Microsoft Yahei, Arial</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
         </div>
 
         
@@ -209,8 +408,6 @@
             
                 <a class="prev" rel="prev" href="/2022/08/13/redis%E5%9F%BA%E7%A1%80/">Redis基本操作</a>
             
-            
-            <a class="next" rel="next" href="/2022/08/12/hello-world/">Hello World</a>
             
         </section>
 
