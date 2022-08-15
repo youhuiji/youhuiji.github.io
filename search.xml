@@ -1,14 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo搭建博客</title>
-    <url>/2022/08/12/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[]]></content>
+    <title>WSL安装Minicoda</title>
+    <url>/2022/08/15/WSL%E5%AE%89%E8%A3%85Minicoda/</url>
+    <content><![CDATA[<h3 id="Anaconda常用命令"><a href="#Anaconda常用命令" class="headerlink" title="Anaconda常用命令"></a>Anaconda常用命令</h3><ul>
+<li>查看安装了哪些包</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda list</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查看当前创建的虚拟环境</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda env list </span><br><span class="line">conda info -e</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>更新当前<code>conda</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda update conda</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建虚拟环境</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda create -n your_env_name python=x.x</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">例如创建python3.7版本的虚拟环境</span></span><br><span class="line">conda create -n env_py37 python=3.7</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>anaconda命令创建python版本为x.x，名字为your_env_name的虚拟环境。your_env_name文件可以在Anaconda安装目录envs文件下找到。</p>
+</blockquote>
+<ul>
+<li>激活或者切换虚拟环境</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">activate your_env_name</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果上面的指令没有起作用，则用 :</span></span><br><span class="line">conda activate your_env_name</span><br></pre></td></tr></table></figure>
+
+<img src="/../images-static/202208100020477.png" alt="image-20220529180620420" style="zoom:70%;" />
+
+<ul>
+<li>退出当前虚拟环境</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">deactivate env_name</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果不起作用，采用指令：</span></span><br><span class="line">conda deactivate</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除虚拟环境</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda remove -n your_env_name --all</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除虚拟环境中的某个包</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda remove --name $your_env_name  $package_name </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为Ananconda设置清华大学镜像源</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 添加清华镜像源</span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn</span><br><span class="line"># 设置搜索时显示通道地址，该命令会创建 .condarc文件</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure>
+
+<p>如果此途径修改失败，可以参考清华官方指引：<a href="https://mirrors4.tuna.tsinghua.edu.cn/help/anaconda/">https://mirrors4.tuna.tsinghua.edu.cn/help/anaconda/</a></p>
+<ul>
+<li>取消使用清华镜像源，使用默认镜像</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">conda config --remove-key channels</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>pip 指定下载镜像源</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建虚拟环境后，常用包安装</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">conda install numpy</span><br><span class="line">conda install pandas</span><br><span class="line">conda install matplotlib</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="安装Miniconda"><a href="#安装Miniconda" class="headerlink" title="安装Miniconda"></a>安装<code>Miniconda</code></h3><ul>
+<li>下载<code>Miniconda </code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">这里下载的Miniconda版本对应的是python3.7</span> </span><br><span class="line">wget -c https://repo.anaconda.com/miniconda/Miniconda3-py37_4.12.0-Linux-x86_64.sh -O Miniconda-py37.sh</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">Miniconda官网：https://conda.io/miniconda.html</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装<code>Miniconda</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">赋予Miniconda运行权限</span></span><br><span class="line">sudo chmod u+x  Miniconda-py37.sh</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">运行</span></span><br><span class="line">bash Miniconda-py37.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这里需要注意的是，如果是一个全新干净的系统，安装过程中可以一路默认安装，如果已经安装其它依赖原生系统python的版本，最后在询问是否将<code>conda</code>加入环境变量的时候最好选择no，以避免导致未知的错误。【可以参考的错误经历：<a href="https://mp.weixin.qq.com/s?__biz=MzAxMDkxODM1Ng==&mid=2247486380&idx=1&sn=9329fcd0a60ac5488607d359d6c28134&chksm=9b484b17ac3fc20153d25cbdefe5017c7aa9080d13b5473a05f79808244e848b0a45d2a6a735&scene=21#wechat_redirect">Anaconda is a snake</a>】</li>
+</ul>
+<img src="/../images-static/202208100022793.png" alt="image-20220528000612498" style="zoom:80%;" />
+
+<h5 id="1、默认安装过程"><a href="#1、默认安装过程" class="headerlink" title="1、默认安装过程"></a>1、默认安装过程</h5><ul>
+<li>安装完成之后进入<code>Minicodna</code>安装目录，可以看到<code>python</code>和<code>python3</code>已经指向 Miniconda的python版本</li>
+</ul>
+<img src="/../images-static/202208100022249.png" alt="image-20220528002757055" style="zoom:80%;" />
+
+<ul>
+<li><p>在通过默认安装结束之后，在命令行中会出现一个 <code>（base）XXXXX</code> 的形式，此时可以通过键入 <code>conda deactivate</code> 退出conda的base模式，但是这样做下次启动时还是会出现<code>（base）XXXXX</code> ，而且python链接重新指向了系统内置版本，很明显治标不治本。</p>
+</li>
+<li><p>在conda官方文档中【<a href="https://conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html#change-command-prompt-changeps1">conda官方手册</a>】有这样的描述</p>
+<blockquote>
+<p>When using conda activate, change the command prompt from <code>$PS1</code> to include the activated environment. The default is True.</p>
+<blockquote>
+<p>EXAMPLE:<br><code>changeps1: False</code></p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<p>所以只需要在<code>.condarc</code> 文件中，加入 <code> changeps1: False</code> ，即可消除<code>(base)</code>字样，同时python链接指向变为Miniconda的版本。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo vim ~/.condarc</span><br></pre></td></tr></table></figure>
+
+<img src="/../images-static/202208100022964.png" alt="image-20220528001615084" style="zoom:80%;" />
+
+<h5 id="2、不将conda默认添加进系统环境"><a href="#2、不将conda默认添加进系统环境" class="headerlink" title="2、不将conda默认添加进系统环境"></a>2、不将<code>conda</code>默认添加进系统环境</h5><ul>
+<li><p>参考教程 【<a href="https://www.jianshu.com/p/edaa744ea47d">conda 安装教程</a>】</p>
+</li>
+<li><p>此时在命令行中键入 <code>conda</code> 是没有任何反应的。此时需要在<code>Miniconda</code>安装目录下，赋予<code>activate</code>，启动权限。<code>Miniconda</code>默认安装路径为 <code>/home/user_name/miniconda3/bin</code></p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">赋予所有用户运行权限</span></span><br><span class="line">sudo chmod a+x activate</span><br></pre></td></tr></table></figure>
+
+<img src="/../images-static/202208100022335.png" alt="image-20220528002650110" style="zoom:80%;" />
+
+<ul>
+<li>启动<code>conda</code></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ./activate</span><br><span class="line"><span class="meta prompt_"> # </span><span class="language-bash">. ./activate 也是可以的</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>这时命令行前面出现<code>(base)</code>的时候说明现在已经在<code>conda</code>的环境中了。这时候输入<code>conda list</code> 命令就有反应了</li>
+</ul>
+<img src="/../images-static/202208100022711.png" alt="image-20220528002622456" style="zoom:80%;" />
+]]></content>
       <categories>
-        <category>hexo</category>
+        <category>WSL</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>Miniconda</tag>
       </tags>
   </entry>
   <entry>
@@ -28,6 +152,17 @@
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo搭建博客</title>
+    <url>/2022/08/12/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>hexo</category>
       </categories>
