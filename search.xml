@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>WSL安装JDK</title>
+    <url>/2022/08/15/WSL%E5%AE%89%E8%A3%85JDK/</url>
+    <content><![CDATA[<h5 id="1、OpenJDK"><a href="#1、OpenJDK" class="headerlink" title="1、OpenJDK"></a>1、OpenJDK</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">web-src</span></span><br><span class="line">http://www.codebaoku.com/jdk/jdk-openjdk.html#jdk11.0.2</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">搜索库中可用的openjdk版本</span></span><br><span class="line">apt search openjdk</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> 安装jdk11的版本(LTS)</span></span><br><span class="line">sudo apt install openjdk-11-jdk</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">搜寻JDK安装的默认路径</span></span><br><span class="line">dpkg -L openjdk-11-jdk</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装jdk8版本(使用最多的LTS版本)</span></span><br><span class="line">sudo apt install openjdk-8-jdk</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>由下图可以看到，openjdk默认安装路径是在 <code>/usr/lib/jvm</code> 下</li>
+</ul>
+<img src="/../images-static/202208100022989.png" alt="image-20220530120034159" style="zoom:75%;" />
+
+<ul>
+<li>验证是否安装成功</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /usr/lib/jvm</span><br><span class="line">ll -a</span><br><span class="line">cd /usr/lib/jvm/java-11-openjdk-amd64/bin</span><br><span class="line">ll -a | grep java</span><br><span class="line">./java --verison</span><br><span class="line">cd /usr/lib/jvm/java-8-openjdk-amd64/bin</span><br><span class="line">ll -a | grep java</span><br><span class="line">./java --verison</span><br><span class="line">cd ~</span><br><span class="line">java --version</span><br></pre></td></tr></table></figure>
+
+<img src="/../images-static/202208100022284.png" alt="image-20220530120355674" style="zoom:75%;" />
+
+<h5 id="2、OracleJDK"><a href="#2、OracleJDK" class="headerlink" title="2、OracleJDK"></a>2、OracleJDK</h5><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ~</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载oracle-jdk-1.8</span></span><br><span class="line">wget https://120-195-166-66.d.123pan.cn:30443/123-794/1b81dd07/1661483-0/1b81dd078f19e60365757c56a58ca71a\?v\=1\&amp;t\=1653878904\&amp;s\=911675691551fa6fc2bafc8ee6b3614d\&amp;filename\=jdk-8u331-linux-x64.tar.gz\&amp;d\=5e41af74 -O oraclejdk-8.tar.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载oracle-jdk-11</span></span><br><span class="line">wget https://36-156-71-22.d.123pan.cn:30443/123-226/31827360/1661483-0/31827360e0811206c1725b5d4a37d8e2\?v\=1\&amp;t\=1653878806\&amp;s\=c2fe637b3fb235a6cb53c346de2b2f49\&amp;filename\=jdk-11.0.15_linux-x64_bin.deb\&amp;d\=9836dae9 -O oraclejdk-11.deb</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">安装 oraclejdk-11.deb</span></span><br><span class="line">sudo dpkg -i oraclejdk-11.deb</span><br><span class="line">cd /usr/lib/jvm/jdk-11/bin</span><br><span class="line">./java --version</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 oracle-jdk-1.8</span></span><br><span class="line">cd ~</span><br><span class="line">extract oraclejdk-8.tar.gz</span><br><span class="line">mv ~/jdk1.8.0_331 /usr/lib/jvm</span><br><span class="line">cd /usr/lib/jvm/jdk1.8.0_331/bin</span><br><span class="line">./java -version</span><br></pre></td></tr></table></figure>
+
+<h5 id="3、JDK版本自由切换"><a href="#3、JDK版本自由切换" class="headerlink" title="3、JDK版本自由切换"></a>3、JDK版本自由切换</h5><ul>
+<li>上诉四个版本安装完成之后，系统默认jdk版本是安装的第一个版本</li>
+</ul>
+<img src="/../images-static/202208100022847.png" alt="image-20220530121705131" style="zoom:80%;" />
+
+<ul>
+<li><pre><code class="shell">  vim ~/.zshrc
+  
+  # &gt;&gt;&gt;&gt;&gt;&gt; jdk version change &gt;&gt;&gt;&gt;&gt;&gt;&gt;
+  export PATH=&quot;/usr/lib/jvm/java-11-openjdk-amd64/bin:$PATH&quot;
+  # &gt;&gt;&gt;&gt;&gt;&gt; jdk version change end &gt;&gt;&gt;&gt;&gt;&gt;&gt;
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 实际上，除了修改`.zshrc`文件外，还存在另一种方式，使用` update-alternatives`，这本来就是设计为了在单系统中提供多版本环境配置的一个解决方案。</span><br><span class="line"></span><br><span class="line">```shell</span><br><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-11/bin/java 300</span><br><span class="line">sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_331/bin/java 200</span><br><span class="line">#切换jdk版本</span><br><span class="line">sudo update-alternatives --config java</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>为了方便起见，优先选择第一种解决方案，第一种方案是直接把下面的命令都导入全局了，而第二种方案只是设置了一个java命令，虽然看上去切换更智能了，但是其他bin目录下的其他命令都未进行设置，也就是全局环境是是找不到其他命令的。</p>
+</li>
+</ul>
+<img src="/../images-static/202208100022147.png" alt="image-20220530122531601" style="zoom:80%;" />
+
+<ul>
+<li>注意在使用IDEA连接WSL的JAVA环境时，需要保证防火墙对IDEA开放</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行以下命令以允许使用 WSL 进行连接：</span></span><br><span class="line">New-NetFirewallRule -DisplayName &quot;WSL&quot; -Direction Inbound  -InterfaceAlias &quot;vEthernet (WSL)&quot;  -Action Allow</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后执行以下命令以续订防火墙规则</span></span><br><span class="line">Get-NetFirewallProfile -Name Public | Get-NetFirewallRule | where DisplayName -ILike &quot;IntelliJ IDEA*&quot; | Disable-NetFirewallRule</span><br></pre></td></tr></table></figure>
+
+<img src="/../images-static/202208100029538.png" alt="image-20220601015814509" style="zoom:100%;" />
+]]></content>
+      <categories>
+        <category>WSL</category>
+      </categories>
+      <tags>
+        <tag>JDK</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/08/12/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WSL安装Minicoda</title>
     <url>/2022/08/15/WSL%E5%AE%89%E8%A3%85Minicoda/</url>
     <content><![CDATA[<h3 id="Anaconda常用命令"><a href="#Anaconda常用命令" class="headerlink" title="Anaconda常用命令"></a>Anaconda常用命令</h3><ul>
@@ -136,27 +212,26 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/08/12/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>zsh配置与安装</title>
+    <url>/2022/08/15/zsh%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<h4 id="1·安装ZSH"><a href="#1·安装ZSH" class="headerlink" title="1·安装ZSH"></a>1·安装ZSH</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install zsh</span><br><span class="line">sudo apt install git</span><br><span class="line">chsh -s /usr/bin/zsh</span><br><span class="line">sh -c &quot;$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里如果提示连接失败进入 oh-my-zsh代码库 (https://github.com/ohmyzsh/ohmyzsh/blob/master/tools/install.sh) 复制 install.sh到本地</span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后执行 bash ./install.sh</span></span><br><span class="line"></span><br><span class="line">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</span><br><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</span><br><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在该文件中的插件处 添加 zsh-autosuggestions zsh-syntax-highlighting</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<img src="/../images-static/202208100021945.png" alt="image-20220530013034557" style="zoom:80%;" />
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h4 id="2·Miniconda配置"><a href="#2·Miniconda配置" class="headerlink" title="2·Miniconda配置"></a>2·Miniconda配置</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="comment">#########文件添加如下：</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">!! Contents within this block are managed by <span class="string">&#x27;conda init&#x27;</span> !!</span></span><br><span class="line">__conda_setup=&quot;$(&#x27;/home/z/miniconda3/bin/conda&#x27; &#x27;shell.bash&#x27; &#x27;hook&#x27; 2&gt; /dev/null)&quot;</span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line">    eval &quot;$__conda_setup&quot;</span><br><span class="line">else</span><br><span class="line">    if [ -f &quot;/home/z/miniconda3/etc/profile.d/conda.sh&quot; ]; then</span><br><span class="line">        . &quot;/home/z/miniconda3/etc/profile.d/conda.sh&quot;</span><br><span class="line">    else</span><br><span class="line">        export PATH=&quot;/home/z/miniconda3/bin:$PATH&quot;</span><br><span class="line">    fi</span><br><span class="line">fi</span><br><span class="line">unset __conda_setup</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt; <span class="string">conda initialize &lt;&lt;&lt;</span></span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h4 id="3·未安装包提示"><a href="#3·未安装包提示" class="headerlink" title="3·未安装包提示"></a>3·未安装包提示</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install command-not-found</span><br><span class="line"></span><br><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="comment">##########文件添加如下：</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt;&gt; get zsh_command_not_found info &gt;&gt;&gt;&gt;&gt;&gt;</span></span><br><span class="line">. /etc/zsh_command_not_found</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span></span><br><span class="line"></span><br><span class="line">source ~/.zshrc\</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h4 id="4·显示全文件目录"><a href="#4·显示全文件目录" class="headerlink" title="4·显示全文件目录"></a>4·显示全文件目录</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ~/.oh-my-zsh/themes</span><br><span class="line">vim robbyrussell.zsh-theme</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将第二行修改为 PROMPT+=<span class="string">&#x27; %&#123;$fg[cyan]%&#125;[$PWD]%&#123;$reset_color%&#125; $(git_prompt_info)&#x27;</span></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5·JDK配置"><a href="#5·JDK配置" class="headerlink" title="5·JDK配置"></a>5·JDK配置</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt;&gt;&gt;&gt; jdk version change &gt;&gt;&gt;&gt;&gt;&gt;&gt;</span></span><br><span class="line">export PATH=&quot;/usr/lib/jvm/java-11-openjdk-amd64/bin:$PATH&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">&gt;&gt;&gt;&gt;&gt;&gt; jdk version change end &gt;&gt;&gt;&gt;&gt;&gt;&gt;</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>hexo</category>
+        <category>WSL</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
+        <tag>zsh</tag>
       </tags>
   </entry>
   <entry>
